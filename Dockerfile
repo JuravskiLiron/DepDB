@@ -1,25 +1,24 @@
-﻿# ============================
-# 1. BUILD STAGE
-# ============================
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+﻿# --- BUILD STAGE ---
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+
 WORKDIR /src
 
-# Копируем csproj отдельно чтобы кешировать restore
+# Copy csproj and restore
 COPY *.csproj ./
 RUN dotnet restore
 
-# Копируем весь проект
-COPY . ./
+# Copy everything and build
+COPY . .
 RUN dotnet publish -c Release -o /app/publish
 
+# --- RUNTIME STAGE ---
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 
-# ============================
-# 2. RUNTIME STAGE
-# ============================
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-
 COPY --from=build /app/publish .
 
-# Запускаем приложение
+# Environment variables for Render
+ENV ASPNETCORE_URLS=http://+:10000
+EXPOSE 10000
+
 ENTRYPOINT ["dotnet", "DepDB.dll"]
