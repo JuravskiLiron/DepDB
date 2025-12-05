@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>LSPD CAD - @ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/cad.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+          rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="lspd-body">
+
+    <div class="lspd-shell">
+        <aside class="lspd-sidebar">
+            <div class="lspd-logo">
+                <div class="lspd-badge">LSPD</div>
+                <div class="lspd-title">Computer Aided Dispatch</div>
+            </div>
+            
+            
+
+            <nav class="lspd-nav">
+                <a class="lspd-nav-item" href="@Url.Action("Index", "Home")">Dashboard</a>
+                <a class="lspd-nav-item" href="@Url.Action("Index", "Citizens")">Citizens</a>
+                <a class="lspd-nav-item" href="@Url.Action("Index", "Vehicles")">Vehicles</a>
+                <a class="lspd-nav-item" href="@Url.Action("Index", "Incidents")">Incidents</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="lspd-nav-item" href="@Url.Action("Index", "Admin")">Admin</a>
+                }
+            </nav>
+
+            <div class="lspd-user">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <div>👮 @User.Identity.Name</div>
+                    <div class="text-muted">@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</div>
+                    <a class="btn btn-sm btn-outline-light mt-2"
+                       href="@Url.Action("Logout", "Account")">Logout</a>
+                }
+                else
+                {
+                    <a class="btn btn-sm btn-primary"
+                       href="@Url.Action("Login", "Account")">Login</a>
+                }
+            </div>
+        </aside>
+
+        <main class="lspd-main">
+            <header class="lspd-header">
+                <h1 class="lspd-page-title">@ViewData["Title"]</h1>
+            </header>
+
+            <section class="lspd-content">
+                @RenderBody()
+            </section>
+        </main>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,27 @@
+body {
+    background: #0f0f0f !important;
+    color: #e8e8e8;
+}
+
+.card {
+    background: #181818 !important;
+    border: 1px solid #2d2d2d !important;
+    border-radius: 8px !important;
+}
+
+.table-dark {
+    background-color: #121212;
+}
+
+.btn-primary {
+    background-color: #0055ff !important;
+    border-color: #004be0 !important;
+}
+
+.btn-danger {
+    background-color: #cc0000 !important;
+}
+
+.btn-success {
+    background-color: #008f39 !important;
+}

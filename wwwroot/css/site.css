@@ -1,0 +1,125 @@
+body.lspd-body {
+  background: #020617;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.lspd-shell {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+.lspd-sidebar {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  border-right: 1px solid #1e293b;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.lspd-logo {
+  text-align: center;
+}
+
+.lspd-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  border: 2px solid #38bdf8;
+  color: #38bdf8;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.lspd-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #9ca3af;
+}
+
+.lspd-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.lspd-nav-item {
+  display: block;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.5rem;
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+}
+
+.lspd-nav-item:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.lspd-user {
+  margin-top: auto;
+  font-size: 0.85rem;
+}
+
+.lspd-main {
+  padding: 1.5rem 1.5rem 2rem;
+}
+
+.lspd-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.lspd-page-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.lspd-content {
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: 1rem;
+  border: 1px solid #1f2937;
+  padding: 1rem;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.8);
+}
+
+/* Таблицы как в МВД терминале */
+.table.lspd-table {
+  color: #e5e7eb;
+  font-size: 0.85rem;
+}
+
+.table.lspd-table thead {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.table.lspd-table thead th {
+  border-bottom: 1px solid #1e293b;
+  color: #9ca3af;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+}
+
+.table.lspd-table tbody tr {
+  background: transparent;
+}
+
+.table.lspd-table tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.table.lspd-table tbody tr:hover {
+  background: rgba(56, 189, 248, 0.08);
+}

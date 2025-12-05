@@ -1,0 +1,69 @@
+@model IEnumerable<DepDB.Models.Citizen>
+@{
+    ViewData["Title"] = "Citizens Database";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <form class="d-flex gap-2" method="get">
+        <input type="text"
+               name="search"
+               value="@ViewBag.Search"
+               class="form-control form-control-sm"
+               placeholder="Name / ID..." />
+        <button class="btn btn-sm btn-outline-info">Search</button>
+    </form>
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Officer"))
+    {
+        <a class="btn btn-sm btn-primary"
+           href="@Url.Action("Create")">+ New Citizen</a>
+    }
+</div>
+
+<div class="table-responsive">
+    <table class="table table-sm lspd-table align-middle">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>DOB</th>
+            <th>ID</th>
+            <th>Wanted</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.FullName</td>
+                <td>@c.DateOfBirth</td>
+                <td>@c.NationalId</td>
+                <td>
+                    @if (c.IsWanted)
+                    {
+                        <span class="badge bg-danger">WANTED</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Clear</span>
+                    }
+                </td>
+                <td class="text-end">
+                    <a class="btn btn-xs btn-outline-info"
+                       href="@Url.Action("Details", new { id = c.Id })">Open</a>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Officer"))
+                    {
+                        <a class="btn btn-xs btn-outline-warning"
+                           href="@Url.Action("Edit", new { id = c.Id })">Edit</a>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-xs btn-outline-danger"
+                           href="@Url.Action("Delete", new { id = c.Id })">Del</a>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

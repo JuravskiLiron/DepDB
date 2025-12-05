@@ -1,0 +1,33 @@
+@model IEnumerable<DepDB.Models.UserAccount>
+
+<h2 class="mb-4">User Management</h2>
+
+<a class="btn btn-primary mb-3" href="/Admin/Create">Create User</a>
+
+<table class="table table-striped table-dark">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th style="width:150px"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var u in Model)
+    {
+        <tr>
+            <td>@u.FullName</td>
+            <td>@u.Username</td>
+            <td>@u.Role</td>
+            <td>@(u.IsActive ? "Active" : "Disabled")</td>
+            <td>
+                <a class="btn btn-sm btn-warning" href="/Admin/Edit/@u.Id">Edit</a>
+                <a class="btn btn-sm btn-danger" href="/Admin/Delete/@u.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
