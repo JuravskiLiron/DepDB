@@ -5,8 +5,18 @@ using DepDB.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Mongo configuration
-builder.Services.Configure<MongoOptions>(
-    builder.Configuration.GetSection("Mongo"));
+var mongoConnection = Environment.GetEnvironmentVariable("MONGO_CONNECTION_STRING")
+                      ?? builder.Configuration["Mongo:ConnectionString"];
+
+var mongoDbName = Environment.GetEnvironmentVariable("MONGO_DATABASE_NAME")
+                  ?? builder.Configuration["Mongo:DatabaseName"];
+
+builder.Services.Configure<MongoOptions>(options =>
+{
+    options.ConnectionString = mongoConnection;
+    options.DatabaseName = mongoDbName;
+});
+
 
 builder.Services.AddSingleton<MongoContext>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(MongoRepository<>));
